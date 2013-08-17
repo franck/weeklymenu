@@ -1,0 +1,9 @@
+<%= render "/shared/error_messages", :target => @recipe %>
+<div>
+  <%= f.label :name, "Nom de la recette" %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.submit "Enregistrer" %>
+  <%= link_to "annuler", recipes_path %>
+</div>

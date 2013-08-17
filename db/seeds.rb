@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Recipe.find_or_create_by_name("Saumon riz gluant")
+Recipe.find_or_create_by_name("Steak tartare")
+Recipe.find_or_create_by_name("Oeufs sur le plate")

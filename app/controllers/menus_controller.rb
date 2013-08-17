@@ -10,6 +10,7 @@ class MenusController < ApplicationController
 
   def show
     @menu = Menu.find(params[:id])
+    @recipes = @menu.recipes
   end
 
 end

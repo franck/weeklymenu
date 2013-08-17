@@ -6,6 +6,7 @@
   <% for recipe in @recipes %>
     <tr>
       <td><%= recipe.name %></td>
+      <td><%= link_to 'modifier', edit_recipe_path(recipe) %></td>
     </tr>
   <% end %>
 </table>
