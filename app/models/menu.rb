@@ -6,4 +6,8 @@ class Menu < ActiveRecord::Base
       self.recipes << Recipe.random
     end
   end
+
+  def name
+    "Menu du #{I18n.l(created_at, format: '%d %B %Y')}"
+  end
 end

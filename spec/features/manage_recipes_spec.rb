@@ -13,17 +13,29 @@ describe "Manage recipes:" do
     end
   end
 
-  describe "#update" do
+  context "with a recipe" do
     let!(:recipe) { create(:recipe) }
-    it "edit the recipe" do
+    before do 
       visit '/'
       click_link 'Recettes'
-      click_link "modifier"
-      fill_in 'recipe_name', with: "Saumon riz gluant"
-      click_button "Enregistrer"
-      page.should have_content "Saumon riz gluant"
-      page.should have_no_content recipe.name
     end
+    describe "#update" do
+      it "edit the recipe" do
+        click_link "modifier"
+        fill_in 'recipe_name', with: "Saumon riz gluant"
+        click_button "Enregistrer"
+        page.should have_content "Saumon riz gluant"
+        page.should have_no_content recipe.name
+      end
+    end
+
+    describe "#destroy" do
+      it "removes the recipe" do
+        click_link 'supprimer'
+        page.should have_no_content recipe.name
+      end
+    end
+
   end
 
 end
