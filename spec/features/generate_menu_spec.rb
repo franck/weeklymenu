@@ -16,11 +16,10 @@ describe "Menu:" do
       select "2", from: "menu_nb_meals_per_day"
       click_button "Générer"
     end
-    it "generate a Menu for 5 days 2 meal per day" do
+    it "generate a Menu for 5 days and 2 meals per day" do
       page.should have_content "Jour 1"
       page.should have_content "Déjeuner"
       page.should have_content "Diner"
-      page.should have_content recipe.name
       page.should have_content "Jour 2"
     end
     it "shows the menu in the index page" do
@@ -53,7 +52,6 @@ describe "Menu:" do
       it "picks new recipes" do
         click_link menu.name
         click_link 'Recommencer'
-        page.should have_content recipe.name
         page.should have_content "Jour 1"
       end
     end

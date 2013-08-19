@@ -9,9 +9,11 @@
     <dl>
       <% for meal in day.meals %>
         <dt><%= meal.name %></dt>
-        <dd><%= meal.recipe.name %></dd>
+        <dd><%= meal.recipe.try(:name) %></dd>
       <% end %>
     </dl>
     </dd>
   <% end %>
 </dl>
+
+<%= link_to "Ajouter un jour", new_menu_day_path(@menu) %>

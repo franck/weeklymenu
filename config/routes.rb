@@ -3,6 +3,7 @@ Weeklymenu::Application.routes.draw do
     member do
       post :reset
     end
+    resources :days
   end
   resources :recipes
   root 'menus#index'
