@@ -4,7 +4,7 @@ require 'spec_helper'
 describe "Menu:" do
   let!(:recipe) { create(:recipe) }
   before do
-    4.times { create(:recipe) }
+    9.times { create(:recipe) }
   end
 
   describe "#create" do
@@ -13,10 +13,12 @@ describe "Menu:" do
       stub_time(2013, 8, 17, 2, 0, 0)
       click_link 'Créer un menu'
     end
-    it "generate a Menu for 5 days" do
+    it "generate a Menu for 5 days 2 meal per day" do
       page.should have_content "Jour 1"
-      page.should have_content "Jour 2"
+      page.should have_content "Déjeuner"
+      page.should have_content "Diner"
       page.should have_content recipe.name
+      page.should have_content "Jour 2"
     end
     it "shows the menu in the index page" do
       click_link "Menus"
@@ -25,7 +27,8 @@ describe "Menu:" do
   end
 
   context "with a menu" do
-    let(:day) { create(:day, recipe: recipe) }
+    let(:meal) { create(:meal, recipe: recipe) }
+    let(:day) { create(:day, meals: [meal]) }
     let!(:menu) { create(:menu, days: [day]) }
     before do
       visit '/'

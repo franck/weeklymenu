@@ -12,15 +12,22 @@ describe Menu do
     end
   end
 
-  context "with 5 recipes" do
+  context "with 10 recipes" do
     before do
-      5.times { create(:recipe) }
+      10.times { create(:recipe) }
     end
     describe "#generate" do
       it "adds 5 days with random recipes" do
         menu = Menu.new
         menu.generate
         menu.days.size.should == 5
+      end
+      it "adds 2 meals per days" do
+        menu = Menu.new
+        menu.generate
+        menu.days.each do |day|
+          day.meals.size.should == 2
+        end
       end
     end
 

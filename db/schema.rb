@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130819092637) do
+ActiveRecord::Schema.define(version: 20130819103035) do
 
   create_table "day_recipes", force: true do |t|
     t.integer  "day_id"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20130819092637) do
   create_table "days", force: true do |t|
     t.integer  "menu_id"
     t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meal_recipes", force: true do |t|
+    t.integer  "meal_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meals", force: true do |t|
+    t.integer  "position"
+    t.integer  "day_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

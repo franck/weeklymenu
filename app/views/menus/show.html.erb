@@ -5,6 +5,13 @@
 <dl>
   <% for day in @days %>
     <dt><%= day.name %></dt>
-    <dd><%= day.recipe.name %></dd>
+    <dd>
+    <dl>
+      <% for meal in day.meals %>
+        <dt><%= meal.name %></dt>
+        <dd><%= meal.recipe.name %></dd>
+      <% end %>
+    </dl>
+    </dd>
   <% end %>
 </dl>

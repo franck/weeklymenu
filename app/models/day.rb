@@ -1,7 +1,6 @@
 class Day < ActiveRecord::Base
   belongs_to :menu
-  has_one :recipe, through: :day_recipe
-  has_one :day_recipe, :dependent => :destroy
+  has_many :meals, -> { order('position desc') }
 
   acts_as_list scope: :menu
 
