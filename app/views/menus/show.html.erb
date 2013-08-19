@@ -1,5 +1,7 @@
 <h1>Menu</h1>
 
+<p><%= link_to "Recommencer", reset_menu_path(@menu), method: 'post' %></p>
+
 <ul>
   <% for recipe in @recipes %>
     <li><%= recipe.name %></li>

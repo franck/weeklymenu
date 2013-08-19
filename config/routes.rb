@@ -1,5 +1,9 @@
 Weeklymenu::Application.routes.draw do
-  resources :menus
+  resources :menus do
+    member do
+      post :reset
+    end
+  end
   resources :recipes
   root 'menus#index'
 end

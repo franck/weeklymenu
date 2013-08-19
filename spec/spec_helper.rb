@@ -21,7 +21,7 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.include FactoryGirl::Syntax::Methods
   config.include EmailSpec::Helpers
-  #config.include TimeTestHelpers
+  config.include TimeTestHelpers
 
 
   # add :focus on a spec to run only that spec

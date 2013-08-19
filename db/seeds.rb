@@ -7,4 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Recipe.find_or_create_by_name("Saumon riz gluant")
 Recipe.find_or_create_by_name("Steak tartare")
-Recipe.find_or_create_by_name("Oeufs sur le plate")
+Recipe.find_or_create_by_name("Oeufs sur le plat")
+Recipe.find_or_create_by_name("Gaspacho, carpaccio")
+Recipe.find_or_create_by_name("Croque Monsieur")

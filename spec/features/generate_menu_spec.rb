@@ -2,11 +2,15 @@
 require 'spec_helper'
 
 describe "Menu:" do
+  let!(:recipe) { create(:recipe) }
+  before do
+    4.times { create(:recipe) }
+  end
 
   describe "#create" do
-    let!(:recipe) { create(:recipe) }
     before do
       visit '/'
+      stub_time(2013, 8, 17, 2, 0, 0)
       click_link 'Créer un menu'
     end
     it "generate a Menu for 5 days" do
@@ -19,7 +23,6 @@ describe "Menu:" do
   end
 
   context "with a menu" do
-    let!(:recipe) { create(:recipe) }
     let!(:menu) { create(:menu, recipes: [recipe]) }
     before do
       visit '/'
@@ -34,6 +37,15 @@ describe "Menu:" do
       it "remove the menu" do
         click_link 'supprimer'
         page.should have_no_content menu.name
+      end
+    end
+
+    describe "#reset" do
+      it "picks new recipes" do
+        click_link menu.name
+        click_link 'Recommencer'
+        page.should have_content recipe.name
+        page.should have_content "Nouvelles recettes"
       end
     end
   end
