@@ -16,8 +16,8 @@ describe Recipe do
         recipe1 = Recipe.random
         recipe1.should be_an_instance_of Array
       end
-      it "picks two different recipes if asked for 2" do
-        Recipe.random(2, uniq: true).should =~ [recipe1, recipe2]
+      it "picks two different recipes if asked for 2 recipes and with 0 duplicates" do
+        Recipe.random(2, duplicates_number: 0).should =~ [recipe1, recipe2]
       end
     end
   end

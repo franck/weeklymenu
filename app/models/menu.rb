@@ -2,7 +2,7 @@ class Menu < ActiveRecord::Base
   has_many :days, -> { order('position') }
 
   def generate
-    recipes = Recipe.random(nb_days * nb_meals_per_day)
+    recipes = Recipe.random(nb_days * nb_meals_per_day, duplicates_number: 2)
     nb_days.times.each do
       day = Day.create
       meals = []
