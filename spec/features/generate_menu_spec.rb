@@ -12,6 +12,9 @@ describe "Menu:" do
       visit '/'
       stub_time(2013, 8, 17, 2, 0, 0)
       click_link 'Créer un menu'
+      select "5", from: "menu_nb_days"
+      select "2", from: "menu_nb_meals_per_day"
+      click_button "Générer"
     end
     it "generate a Menu for 5 days 2 meal per day" do
       page.should have_content "Jour 1"
@@ -29,7 +32,7 @@ describe "Menu:" do
   context "with a menu" do
     let(:meal) { create(:meal, recipe: recipe) }
     let(:day) { create(:day, meals: [meal]) }
-    let!(:menu) { create(:menu, days: [day]) }
+    let!(:menu) { create(:menu, days: [day], nb_days: 5, nb_meals_per_day: 2) }
     before do
       visit '/'
     end

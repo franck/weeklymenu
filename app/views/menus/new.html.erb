@@ -1,0 +1,19 @@
+<h1>Création d'un menu</h1>
+
+<%= form_for @menu do |f| %>
+
+<%= render "/shared/error_messages", :target => @menu %>
+<div>
+  <%= f.label :nb_days, "Nombre de jours" %>
+  <%= f.select :nb_days, options_for_select(1..7) %>
+</div>
+<div>
+  <%= f.label :nb_meals_per_day, "Nombre de repas par jour" %>
+  <%= f.select :nb_meals_per_day, options_for_select(1..2) %>
+</div>
+<div>
+  <%= f.submit "Générer" %>
+  <%= link_to "annuler", menus_path %>
+</div>
+
+<% end %>
