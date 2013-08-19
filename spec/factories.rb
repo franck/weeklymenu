@@ -5,4 +5,5 @@ FactoryGirl.define do
   end
   factory :menu do
   end
+  factory :day do; end
 end

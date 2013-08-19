@@ -14,6 +14,8 @@ describe "Menu:" do
       click_link 'Créer un menu'
     end
     it "generate a Menu for 5 days" do
+      page.should have_content "Jour 1"
+      page.should have_content "Jour 2"
       page.should have_content recipe.name
     end
     it "shows the menu in the index page" do
@@ -23,7 +25,8 @@ describe "Menu:" do
   end
 
   context "with a menu" do
-    let!(:menu) { create(:menu, recipes: [recipe]) }
+    let(:day) { create(:day, recipe: recipe) }
+    let!(:menu) { create(:menu, days: [day]) }
     before do
       visit '/'
     end
@@ -45,7 +48,7 @@ describe "Menu:" do
         click_link menu.name
         click_link 'Recommencer'
         page.should have_content recipe.name
-        page.should have_content "Nouvelles recettes"
+        page.should have_content "Jour 1"
       end
     end
   end

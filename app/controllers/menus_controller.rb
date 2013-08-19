@@ -11,7 +11,7 @@ class MenusController < ApplicationController
 
   def show
     @menu = Menu.find(params[:id])
-    @recipes = @menu.recipes.order('menu_recipes.id')
+    @days = @menu.days.order('position')
   end
 
   def destroy
@@ -23,7 +23,7 @@ class MenusController < ApplicationController
   def reset
     menu = Menu.find(params[:id])
     menu.reset!
-    redirect_to menu_path(menu), notice: "Nouvelles recettes!"
+    redirect_to menu_path(menu)
   end
 
 end

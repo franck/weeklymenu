@@ -1,12 +1,10 @@
 class Menu < ActiveRecord::Base
-  has_many :recipes, through: :menu_recipe
-  has_many :menu_recipe
+  has_many :days, -> { order('position') }
 
   def generate
-    while(self.recipes.size < 5) do
-      recipe = Recipe.random
-      logger.debug("RECIPE: #{recipe.name}")
-      self.recipes << recipe unless self.recipes.include? recipe
+    recipes = Recipe.random(5)
+    recipes.each do |recipe|
+      self.days << Day.create(recipe: recipe)
     end
   end
 
@@ -15,7 +13,7 @@ class Menu < ActiveRecord::Base
   end
 
   def reset!
-    self.recipes.delete_all
+    self.days.destroy_all
     self.generate
   end
 end

@@ -17,10 +17,10 @@ describe Menu do
       5.times { create(:recipe) }
     end
     describe "#generate" do
-      it "adds 5 random recipes" do
+      it "adds 5 days with random recipes" do
         menu = Menu.new
         menu.generate
-        menu.recipes.size.should == 5
+        menu.days.size.should == 5
       end
     end
 
@@ -28,9 +28,9 @@ describe Menu do
       it "removes all recipes and add some new" do
         menu = Menu.new
         menu.generate
-        menu.recipes.size.should == 5
+        menu.days.size.should == 5
         menu.reset!
-        menu.recipes.size.should == 5
+        menu.days.size.should == 5
       end
     end
   end
