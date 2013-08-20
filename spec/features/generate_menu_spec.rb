@@ -31,7 +31,7 @@ describe "Menu:" do
   context "with a menu" do
     let(:meal) { create(:meal, recipe: recipe) }
     let(:day) { create(:day, meals: [meal]) }
-    let!(:menu) { create(:menu, days: [day], nb_days: 5, nb_meals_per_day: 2) }
+    let!(:menu) { create(:menu, days: [day], nb_days: 1, nb_meals_per_day: 2) }
     before do
       visit '/'
     end
@@ -53,6 +53,15 @@ describe "Menu:" do
         click_link menu.name
         click_link 'Recommencer'
         page.should have_content "Jour 1"
+      end
+      context "when I have added a day" do
+        it "generate new days with the new number (not the initial one)" do
+          click_link menu.name
+          click_link "Ajouter un jour"
+          page.should have_content "Jour 2"
+          click_link "Recommencer"
+          page.should have_content "Jour 2"
+        end
       end
     end
   end

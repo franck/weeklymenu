@@ -10,4 +10,16 @@ describe Day do
     end
   end
 
+  describe "#add_meal_with_recipe" do
+    let!(:recipe) { create(:recipe) }
+    let(:day) { create(:day) }
+    it "add a meal" do
+      expect{ day.add_meal_with_recipe }.to change { day.meals.size }.by(1)
+    end
+    it "the added meal as a recipe" do
+      day.add_meal_with_recipe
+      day.meals.last.recipe.should_not be_nil 
+    end
+  end
+
 end

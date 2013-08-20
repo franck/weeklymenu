@@ -19,4 +19,13 @@ describe "#include_more_than" do
     end
   end
 
+  context "with duplicates_number = nil" do
+    it "returns always false" do
+      ['aa', 'bb'].include_more_than?('aa', nil).should be_false
+      ['aa', 'bb'].include_more_than?('cc', nil).should be_false
+      ['aa', 'aa', 'bb'].include_more_than?('aa', nil).should be_false
+      ['aa', 'bb'].include_more_than?('aa', nil).should be_false
+    end
+  end
+
 end

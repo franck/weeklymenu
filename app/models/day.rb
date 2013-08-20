@@ -8,4 +8,8 @@ class Day < ActiveRecord::Base
     "Jour #{position}"
   end
 
+  def add_meal_with_recipe
+    self.meals << Meal.create_with_recipe
+  end
+
 end

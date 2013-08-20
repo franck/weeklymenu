@@ -4,15 +4,17 @@
 
 <dl>
   <% for day in @days %>
-    <dt><%= day.name %></dt>
-    <dd>
-    <dl>
-      <% for meal in day.meals %>
-        <dt><%= meal.name %></dt>
-        <dd><%= meal.recipe.try(:name) %></dd>
-      <% end %>
-    </dl>
-    </dd>
+    <div id="day-<%= day.position %>">
+      <dt><%= day.name %> <%= link_to 'supprimer', menu_day_path(@menu, day), method: 'delete' %></dt>
+      <dd>
+      <dl>
+        <% for meal in day.meals %>
+          <dt><%= meal.name %></dt>
+          <dd><%= meal.recipe.try(:name) %></dd>
+        <% end %>
+      </dl>
+      </dd>
+    </div>
   <% end %>
 </dl>
 

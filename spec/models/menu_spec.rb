@@ -53,4 +53,23 @@ describe Menu do
     end
   end
 
+  describe "#add_day" do
+    let(:recipe) { create(:recipe) }
+    let(:menu) { create(:menu, nb_days: 2, nb_meals_per_day: 2) }
+    before do
+      menu.generate(duplicates_number: nil)
+    end
+    it "add a day record to the menu" do
+      expect { menu.add_day! }.to change{ menu.days.size }.by(1)
+    end
+    it "add a number of meals based on nb_meals_per_day" do
+      menu.add_day!
+      menu.days.size.should == 3
+      menu.days.last.meals.size.should == 2
+    end
+    it "increase nb_days by one" do
+      expect { menu.add_day! }.to change { menu.nb_days }.by(1)
+    end
+  end
+
 end

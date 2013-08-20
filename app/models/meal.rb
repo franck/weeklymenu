@@ -13,4 +13,8 @@ class Meal < ActiveRecord::Base
       "Déjeuner"
     end
   end
+
+  def self.create_with_recipe
+    Meal.create(recipe: Recipe.random.first)
+  end
 end
