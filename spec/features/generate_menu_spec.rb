@@ -63,6 +63,17 @@ describe "Menu:" do
           page.should have_content "Jour 2"
         end
       end
+      context "when I have removed a day" do
+        it "generate new days with the new number (not the initial one)" do
+          click_link menu.name
+          click_link "Ajouter un jour"
+          page.should have_content "Jour 2"
+          find('#day-2').first(:link, 'supprimer').click
+          page.should have_no_content "Jour 2"
+          click_link "Recommencer"
+          page.should have_no_content "Jour 2"
+        end
+      end
     end
   end
 

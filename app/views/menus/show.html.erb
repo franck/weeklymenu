@@ -5,17 +5,20 @@
 <dl>
   <% for day in @days %>
     <div id="day-<%= day.position %>">
-      <dt><%= day.name %> <%= link_to 'supprimer', menu_day_path(@menu, day), method: 'delete' %></dt>
+      <dt><%= day.name %> <%= link_to 'supprimer', menu_day_path(@menu, day), method: 'delete', class: 'remove-day' %></dt>
       <dd>
       <dl>
         <% for meal in day.meals %>
-          <dt><%= meal.name %></dt>
+          <dt><%= meal.name %> <%= link_to 'supprimer', menu_day_meal_path(@menu, day, meal), method: 'delete', class: 'remove-meal' %></dt>
           <dd><%= meal.recipe.try(:name) %></dd>
         <% end %>
       </dl>
+      <% if day.meals.size < 2 %>
+        <%= link_to "Ajouter un repas", menu_day_meals_path(@menu, day), method: 'post' %>
+      <% end %>
       </dd>
     </div>
   <% end %>
 </dl>
 
-<%= link_to "Ajouter un jour", new_menu_day_path(@menu) %>
+<%= link_to "Ajouter un jour", menu_days_path(@menu), method: 'post' %>

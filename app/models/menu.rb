@@ -33,6 +33,13 @@ class Menu < ActiveRecord::Base
     self.save
   end
 
+  def remove_day!(day)
+    d = self.days.find(day)
+    d.destroy
+    self.nb_days -= 1
+    self.save
+  end
+
   def reset!
     self.days.destroy_all
     self.generate

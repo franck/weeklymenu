@@ -72,4 +72,19 @@ describe Menu do
     end
   end
 
+  describe "#remove_day" do
+    let(:day) { create(:day) }
+    let(:menu) { create(:menu, days: [day], nb_days: 1) }
+    it "remove the day" do
+      menu.days.size.should == 1
+      menu.remove_day!(day)
+      menu.reload
+      menu.days.size.should == 0
+    end
+    it "descrease nb_days by 1" do
+      menu.remove_day!(day)
+      menu.nb_days.should == 0
+    end
+  end
+
 end

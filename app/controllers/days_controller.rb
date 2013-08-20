@@ -1,5 +1,5 @@
 class DaysController < ApplicationController
-  def new
+  def create 
     @menu = Menu.find(params[:menu_id])
     @menu.add_day!
     redirect_to menu_path(@menu)
@@ -8,7 +8,7 @@ class DaysController < ApplicationController
   def destroy
     @menu = Menu.find(params[:menu_id])
     day = @menu.days.find(params[:id])
-    day.destroy
+    @menu.remove_day!(day)
     redirect_to menu_path(@menu)
   end
 end

@@ -21,7 +21,7 @@ describe "Manage Days" do
 
   describe "#destroy" do
     it "remove a day from the menu" do
-      click_link 'supprimer'
+      first('.remove-day').click 
       page.should have_no_content "Jour 1"
       page.should have_no_content "Diner"
     end
