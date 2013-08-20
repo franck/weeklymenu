@@ -1,0 +1,7 @@
+<h1>Filtres</h1>
+
+<p><%= link_to "Ajouter un filtre", new_tag_path %></p>
+
+<% for tag in @tags %>
+  <%= tag.name %> <%= link_to 'supprimer', tag_path(tag), method: 'delete', class: 'remove-tag' %><br/>
+<% end %>

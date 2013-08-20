@@ -1,0 +1,9 @@
+<%= render "/shared/error_messages", :target => @tag %>
+<div>
+  <%= f.label :name, "Nom du filtre" %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.submit "Enregistrer" %>
+  <%= link_to "annuler", tags_path %>
+</div>

@@ -9,4 +9,7 @@ FactoryGirl.define do
   end
   factory :day do; end
   factory :meal do; end
+  factory :tag do
+    name { Faker::Lorem.words(2).join(' ') }
+  end
 end

@@ -1,0 +1,55 @@
+addTagToRecipe = ($tag, $recipe) ->
+  tag_id = tagId($tag)
+  recipe_id = $recipe.attr('id').split('-')[1]
+  url = '/recipes/add_tag'
+  data = { id: recipe_id, tag_id: tag_id }
+  $.ajax
+    type: 'POST'
+    url: url
+    data: data
+    success: => 
+      displayTagInRecipe($tag, $recipe)
+
+displayTagInRecipe = ($tag, $recipe) ->
+  tag_id = tagId($tag)
+  tag_text = $tag.text()
+  $recipe.find('td.recipe-name').append(tagCapsule(tag_id, tag_text))
+
+tagCapsule = (id, text) ->
+  "<span class='tag tag-remove' id=tag-#{id}>#{text}</span>"
+
+tagId = ($tag) ->
+  $tag.attr('id').split('-')[1]
+
+removeTag = (event) ->
+  $object = $(event.target)
+  tag_id = tagId($object)
+  recipe_id = $object.parents('tr').attr('id').split('-')[1]
+  url = '/recipes/remove_tag'
+  data = { tag_id: tag_id, id: recipe_id }
+  $.ajax
+    type: 'POST'
+    url: url
+    data: data
+    success: =>
+      removeTagCapsule($object)
+  return false
+
+removeTagCapsule = ($tag) ->
+  $tag.remove()
+
+jQuery ->
+  $('.tag').draggable
+    revert: true,
+    revertDuration: 100
+
+  $('.recipe').droppable
+    hoverClass: 'ui-droppable-hover'
+    drop: (event, ui) ->
+      addTagToRecipe(ui.draggable, $(this))
+      
+  $(document).on 'click', '.tag-remove', removeTag
+
+
+
+

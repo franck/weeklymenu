@@ -1,6 +1,10 @@
 class RecipesController < ApplicationController
+
+  respond_to :js, only: [:add_tag, :remove_tag]
+
   def index
     @recipes = Recipe.all
+    @tags = Tag.all
   end
 
   def new
@@ -33,6 +37,19 @@ class RecipesController < ApplicationController
     recipe = Recipe.find(params[:id])
     recipe.destroy
     redirect_to recipes_path
+  end
+
+  def add_tag
+    @recipe = Recipe.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+    @recipe.tags << @tag
+    render nothing: true
+  end
+
+  def remove_tag
+    recipe_tag = RecipeTag.where(tag_id: params[:tag_id]).where(recipe_id: params[:id]).first
+    recipe_tag.destroy
+    render nothing: true
   end
 
   protected
