@@ -2,7 +2,7 @@ require 'include_more_than'
 
 class Recipe < ActiveRecord::Base
   has_many :tags, through: :recipe_tags
-  has_many :recipe_tags
+  has_many :recipe_tags, :dependent => :destroy
 
 
   def self.random(number=1, options={})

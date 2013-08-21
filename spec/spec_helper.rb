@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include EmailSpec::Helpers
   config.include TimeTestHelpers
+  config.include CapybaraWaitUntil
 
 
   # add :focus on a spec to run only that spec

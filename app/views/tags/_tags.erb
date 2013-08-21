@@ -1,0 +1,3 @@
+<div id="tags">
+  <%= tags.map{|t| content_tag(:span, t.name, class: "tag", id: "tag-#{t.id}") }.join(' ').html_safe %>
+</div>

@@ -1,5 +1,5 @@
 class Menu < ActiveRecord::Base
-  has_many :days, -> { order('position') }
+  has_many :days, -> { order('position') }, :dependent => :destroy
   
   validates :nb_days, presence: true
   validates :nb_meals_per_day, presence: true

@@ -7,6 +7,12 @@ Weeklymenu::Application.routes.draw do
       resources :meals
     end
   end
+  resources :meals do
+    collection do
+      post :add_tag
+      post :remove_tag
+    end
+  end
   resources :recipes do
     collection do
       post :add_tag

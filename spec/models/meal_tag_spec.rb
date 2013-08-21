@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe RecipeTag do
+describe MealTag do
 end

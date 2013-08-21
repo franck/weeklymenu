@@ -1,5 +1,7 @@
 <h1><%= @menu.name %></h1>
 
+<%= render "/tags/tags", tags: @tags %>
+
 <p><%= link_to "Recommencer", reset_menu_path(@menu), method: 'post' %></p>
 
 <dl>
@@ -9,7 +11,10 @@
       <dd>
       <dl>
         <% for meal in day.meals %>
-          <dt><%= meal.name %> <%= link_to 'supprimer', menu_day_meal_path(@menu, day, meal), method: 'delete', class: 'remove-meal' %></dt>
+          <dt class='meal' id="meal-<%= meal.id %>">
+          <%= meal.name %> <%= link_to 'supprimer', menu_day_meal_path(@menu, day, meal), method: 'delete', class: 'remove-meal' %>
+          <%= display_tags(meal.tags) %>
+          </dt>
           <dd><%= meal.recipe.try(:name) %></dd>
         <% end %>
       </dl>

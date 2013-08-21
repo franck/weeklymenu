@@ -20,6 +20,7 @@ class MenusController < ApplicationController
   def show
     @menu = Menu.find(params[:id])
     @days = @menu.days.order('position')
+    @tags = Tag.all
   end
 
   def destroy

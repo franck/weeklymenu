@@ -13,4 +13,17 @@ class MealsController < ApplicationController
     meal.destroy
     redirect_to menu_path(@menu)
   end
+
+  def add_tag
+    @meal = Meal.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+    @meal.tags << @tag
+    render nothing: true
+  end
+
+  def remove_tag
+    meal_tag = MealTag.where(tag_id: params[:tag_id]).where(meal_id: params[:id]).first
+    meal_tag.destroy
+    render nothing: true
+  end
 end

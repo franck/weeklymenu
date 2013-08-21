@@ -4,6 +4,9 @@ class Meal < ActiveRecord::Base
   has_one :recipe, through: :meal_recipe
   has_one :meal_recipe, :dependent => :destroy
 
+  has_many :tags, through: :meal_tags
+  has_many :meal_tags, :dependent => :destroy
+
   acts_as_list scope: :day
 
   def name

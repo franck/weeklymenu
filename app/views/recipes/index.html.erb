@@ -2,15 +2,13 @@
 
 <p><%= link_to "Ajouter une recette", new_recipe_path %></p>
 
-<div id="tags">
-  <%= @tags.map{|t| content_tag(:span, t.name, class: "tag", id: "tag-#{t.id}") }.join(' ').html_safe %>
-</div>
+<%= render "/tags/tags", tags: @tags %>
 
 <table>
   <% for recipe in @recipes %>
     <tr id="recipe-<%= recipe.id %>" class="recipe">
       <td class='recipe-name'>
-        <%= recipe.name %> <%= recipe.tags.map{|tag| content_tag(:span, tag.name, id: "tag-#{tag.id}", class: 'tag-remove') }.join(' ').html_safe %>
+        <%= recipe.name %> <%= display_tags(recipe.tags) %>
       </td>
       <td>
         <%= link_to 'modifier', edit_recipe_path(recipe) %>
