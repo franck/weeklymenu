@@ -12,4 +12,14 @@ class Day < ActiveRecord::Base
     self.meals << Meal.create_with_recipe
   end
 
+  def reset!
+    logger.debug("DEBUG DAY")
+    logger.debug("MEALS: #{self.meals.size}")
+    self.meals.each do |meal|
+      logger.debug("MEAL: #{meal.id}")
+      meal.reset!
+    end
+    save
+  end
+
 end

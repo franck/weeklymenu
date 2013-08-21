@@ -41,7 +41,9 @@ class Menu < ActiveRecord::Base
   end
 
   def reset!
-    self.days.destroy_all
-    self.generate
+    self.days.each do |day|
+      day.reset!
+    end
+    save
   end
 end

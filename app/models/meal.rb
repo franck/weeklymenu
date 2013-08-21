@@ -20,4 +20,9 @@ class Meal < ActiveRecord::Base
   def self.create_with_recipe
     Meal.create(recipe: Recipe.random.first)
   end
+
+  def reset!
+    self.recipe = Recipe.random(1, tags: self.tags).first
+    save
+  end
 end
