@@ -18,7 +18,12 @@ class Meal < ActiveRecord::Base
   end
 
   def self.create_with_recipe
-    Meal.create(recipe: Recipe.random.first)
+    Meal.create(recipe: Recipe.random(1).first)
+  end
+
+  def change_recipe
+    current_recipe = self.recipe
+    self.recipe = Recipe.random(1, tags: self.tags, exclude: [current_recipe]).first
   end
 
   def reset!

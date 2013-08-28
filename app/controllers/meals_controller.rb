@@ -14,6 +14,15 @@ class MealsController < ApplicationController
     redirect_to menu_path(@menu)
   end
 
+  def change_recipe
+    @menu = Menu.find(params[:menu_id])
+    @day = @menu.days.find(params[:day_id])
+    meal = @day.meals.find(params[:id])
+    meal.change_recipe
+    meal.save
+    redirect_to menu_path(@menu)
+  end
+
   def add_tag
     @meal = Meal.find(params[:id])
     @tag = Tag.find(params[:tag_id])

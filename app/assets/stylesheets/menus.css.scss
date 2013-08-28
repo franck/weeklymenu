@@ -1,0 +1,14 @@
+#menu {
+  dl {
+    margin-bottom:20px; float:left; width:100%; margin-top:0px;
+    dt { float:left; width:100px; clear:both; }
+    dd { float:left; }
+  }
+  div.day { margin-top: 20px; float:left; width:100%; }
+  dl.meal-line { 
+    margin-bottom: 10px;
+    dt { margin-bottom: 6px; }
+  }
+  div.bottom-links { clear:both; }
+}
+

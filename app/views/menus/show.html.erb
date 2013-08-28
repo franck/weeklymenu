@@ -1,29 +1,34 @@
-<h1><%= @menu.name %></h1>
+<div id="menu">
+  <h1><%= @menu.name %></h1>
 
-<%= render "/tags/tags", tags: @tags %>
+  <%= render "/tags/tags", tags: @tags %>
 
-<p><%= link_to "Recommencer", reset_menu_path(@menu), method: 'post' %></p>
+  <p><%= link_to "Recommencer", reset_menu_path(@menu), method: 'post', class: 'btn' %></p>
 
-<dl>
-  <% for day in @days %>
-    <div id="day-<%= day.position %>">
-      <dt><%= day.name %> <%= link_to 'supprimer', menu_day_path(@menu, day), method: 'delete', class: 'remove-day' %></dt>
-      <dd>
-      <dl>
-        <% for meal in day.meals %>
-          <dt class='meal' id="meal-<%= meal.id %>">
-          <%= meal.name %> <%= link_to 'supprimer', menu_day_meal_path(@menu, day, meal), method: 'delete', class: 'remove-meal' %>
-          <%= display_tags(meal.tags) %>
-          </dt>
-          <dd><%= meal.recipe.try(:name) %></dd>
+  <dl>
+    <% for day in @days %>
+      <div class="day" id="day-<%= day.position %>">
+        <dt><%= day.name %> <%= link_to icon('remove'), menu_day_path(@menu, day), method: 'delete', class: 'remove-day' %></dt>
+        <dd>
+        <dl class="meal-line">
+          <% for meal in day.meals %>
+            <dt class='meal' id="meal-<%= meal.id %>">
+            <%= meal.name %> <%= link_to icon('remove'), menu_day_meal_path(@menu, day, meal), method: 'delete', class: 'remove-meal' %>
+            <%= display_tags(meal.tags) %>
+            </dt>
+            <dd>
+              <%= meal.recipe.try(:name) %>
+              <%= link_to icon('refresh'), change_recipe_menu_day_meal_path(@menu, day, meal), method: 'put' %>
+            </dd>
+          <% end %>
+        </dl>
+        <% if day.meals.size < 2 %>
+          <%= link_to "Ajouter un repas", menu_day_meals_path(@menu, day), method: 'post', class: 'btn btn-mini' %>
         <% end %>
-      </dl>
-      <% if day.meals.size < 2 %>
-        <%= link_to "Ajouter un repas", menu_day_meals_path(@menu, day), method: 'post' %>
-      <% end %>
-      </dd>
-    </div>
-  <% end %>
-</dl>
+        </dd>
+      </div>
+    <% end %>
+  </dl>
 
-<%= link_to "Ajouter un jour", menu_days_path(@menu), method: 'post' %>
+  <div class="bottom-links"><p><%= link_to "Ajouter un jour", menu_days_path(@menu), method: 'post', class: 'btn' %></p></div>
+</div>

@@ -32,17 +32,27 @@ describe Recipe do
         Recipe.random(4, tags: nil).should =~ [recipe1, recipe2, recipe3, recipe4]
         Recipe.random(4, tags: []).should =~ [recipe1, recipe2, recipe3, recipe4]
       end
-
       it "return recipes with the given tag" do
         Recipe.random(2, tags: [tag1]).should =~ [recipe2, recipe4]
         Recipe.random(2, tags: [tag2]).should =~ [recipe3, recipe4]
       end
-
       it "returns recipes with the given tags" do
         Recipe.random(1, tags: [tag1, tag2]).should =~ [recipe4]
       end
       it "raises an error if requested number of recipes is less than the tagged recipes" do
         expect { Recipe.random(2, tags: [tag1, tag2]).should =~ [recipe4] }.to raise_error
+      end
+    end #with tags constraint
+    context "with exclude options" do
+      let!(:recipe1) { create(:recipe) }
+      it "will never return a recipe included in the exclude array" do
+        expect { Recipe.random(1, exclude: [recipe1]) }.to raise_error
+      end
+      context "with a not excluded recipe" do
+        let!(:recipe2) { create(:recipe) }
+        it "returns only this recipe not excluded" do
+          Recipe.random(1, exclude: [recipe1]).should == [recipe2]
+        end
       end
     end
   end

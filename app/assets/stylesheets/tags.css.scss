@@ -1,1 +1,13 @@
+div#tags { margin-bottom:20px; }
+
 .ui-droppable-hover { background-color: #ffff99; }
+
+.tag, .tag-remove {
+  @extend .label;
+}
+.tag {
+  cursor: move;
+}
+.tag-remove {
+  cursor: pointer;
+}

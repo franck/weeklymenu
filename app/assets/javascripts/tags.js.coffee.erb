@@ -40,6 +40,7 @@ removeTagFromRecipe = (event) ->
 
 addTagToMeal = ($tag, $meal) ->
   tag_id = tagId($tag)
+  console.log($meal)
   meal_id = $meal.attr('id').split('-')[1]
   url = '/meals/add_tag'
   data = { id: meal_id, tag_id: tag_id }

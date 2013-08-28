@@ -76,7 +76,7 @@ describe "Menu:" do
           click_link menu.name
           click_link "Ajouter un jour"
           page.should have_content "Jour 2"
-          find('#day-2').first(:link, 'supprimer').click
+          page.find('#day-2').find('.remove-day').click
           page.should have_no_content "Jour 2"
           click_link "Recommencer"
           page.should have_no_content "Jour 2"

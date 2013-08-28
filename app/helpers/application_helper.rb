@@ -9,4 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def icon(name, white=false)
+    classes = ["icon-#{name}"]
+    classes << "icon-white" if white
+    "<i class='#{classes.join(' ')}'></i>".html_safe
+  end
+
 end

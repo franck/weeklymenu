@@ -11,7 +11,11 @@ class Recipe < ActiveRecord::Base
     default_options = { duplicates_number: 0 }
     options = default_options.merge(options)
     recipes = []
+    watchdog = 0
     while recipes.size < number do 
+      watchdog += 1
+      raise "not enough recipes" if watchdog > number*5
+      # TAGS
       if options[:tags] && options[:tags].any?
         recipes_number = Recipe.with_tags(options[:tags]).to_a.size
         raise "not enough recipes" if recipes_number < number
@@ -21,7 +25,18 @@ class Recipe < ActiveRecord::Base
         offset = rand(Recipe.count)
         recipe = Recipe.offset(offset).first
       end
-      recipes << recipe unless recipes.include_more_than? recipe, options[:duplicates_number]
+
+      # recipe in the exclude array ?
+      if options[:exclude] && options[:exclude].include?(recipe)
+        next
+      end
+
+      # recipe already in the result array ?
+      if recipes.include_more_than? recipe, options[:duplicates_number]
+        next
+      end
+
+      recipes << recipe
     end
     return recipes.compact
   end

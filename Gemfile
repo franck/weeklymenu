@@ -12,6 +12,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'acts_as_list'
 
+gem 'bootstrap-sass', '~> 2.3.2.1'
+
 group :doc do
   gem 'sdoc', require: false
 end

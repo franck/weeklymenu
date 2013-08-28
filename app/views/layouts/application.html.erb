@@ -7,15 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p>
-  <%= link_to 'Menus', menus_path %>
-  <%= link_to 'Recettes', recipes_path %>
-  <%= link_to 'Filtres', tags_path %>
-  </p>
+  <div class="container">
+    <p>
+    <%= link_to 'Menus', menus_path %>
+    <%= link_to 'Recettes', recipes_path %>
+    <%= link_to 'Filtres', tags_path %>
+    </p>
 
-  <%= render "/shared/flashes_box" %>
+    <%= render "/shared/flashes_box" %>
 
-<%= yield %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

@@ -4,7 +4,11 @@ Weeklymenu::Application.routes.draw do
       post :reset
     end
     resources :days do
-      resources :meals
+      resources :meals do
+        member do
+          put :change_recipe
+        end
+      end
     end
   end
   resources :meals do
